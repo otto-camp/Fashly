@@ -7,7 +7,8 @@ import {
   Overlay,
   Title,
 } from "@mantine/core";
-import heroImage from "../assets/hero-image.jpg";
+import heroImage from "../assets/hero-image.webp";
+import { IconMap } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   hero: {
@@ -66,7 +67,6 @@ const useStyles = createStyles((theme) => ({
     marginInline: "auto",
     width: "40%",
     marginTop: theme.spacing.xl * 1.5,
-
     [theme.fn.smallerThan("sm")]: {
       width: "100%",
     },
@@ -98,7 +98,8 @@ function Hero() {
           radius="md"
           className={classes.control}
         >
-          Get started
+          Shops
+          <IconMap />
         </Button>
       </Container>
     </div>

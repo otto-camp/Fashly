@@ -1,5 +1,14 @@
 import React from "react";
-import { createStyles, Anchor, Group, ActionIcon, Title } from "@mantine/core";
+import {
+  createStyles,
+  Anchor,
+  Group,
+  ActionIcon,
+  Title,
+  Stack,
+  Flex,
+  Box,
+} from "@mantine/core";
 import {
   IconBrandTwitter,
   IconBrandYoutube,
@@ -73,6 +82,16 @@ function Footer({ links }: FooterProps) {
           </ActionIcon>
         </Group>
       </div>
+      <Flex>
+        <Box
+          sx={(theme) => ({
+            backgroundColor:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[6]
+                : theme.colors.gray[2],
+          })}
+        ></Box>
+      </Flex>
     </footer>
   );
 }

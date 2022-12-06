@@ -41,6 +41,7 @@ function App() {
         <Navbar links={["Home", "Products", "Blog", "About", "Contact"]} />
         <Suspense fallback={<div>Loading</div>}>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/blog" element={<Blog />} />

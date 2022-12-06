@@ -1,12 +1,16 @@
 import {
   AspectRatio,
   Card,
+  ColorSwatch,
   Container,
   createStyles,
   Flex,
+  Group,
   Image,
+  Radio,
   SimpleGrid,
   Text,
+  useMantineTheme,
 } from "@mantine/core";
 import React from "react";
 import Hero from "../components/Hero";
@@ -16,6 +20,7 @@ import product3 from "../assets/products/product3.webp";
 import product4 from "../assets/products/product4.webp";
 import Stat from "../components/Stat";
 import { IconBriefcase, IconReportMoney, IconShoe } from "@tabler/icons";
+import { useNavigate } from "react-router-dom";
 
 const mockdata = [
   {
@@ -50,6 +55,12 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  image: {
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
@@ -58,25 +69,21 @@ const useStyles = createStyles((theme) => ({
 
 function Home() {
   const { classes } = useStyles();
+  const theme = useMantineTheme();
+  const navigate = useNavigate();
 
   const cards = mockdata.map((article) => (
-    <Card
-      key={article.title}
-      mt={32}
-      radius={0}
-      component="a"
-      href="/products"
-      className={classes.card}
-    >
+    <Card key={article.title} mt={32} radius={0} className={classes.card}>
       <AspectRatio ratio={1920 / 1080}>
-        <Image src={article.image} width="100%" height="auto" />
+        <Image
+          src={article.image}
+          width="100%"
+          height="auto"
+          className={classes.image}
+          onClick={() => navigate("/products")}
+          withPlaceholder
+        />
       </AspectRatio>
-      <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-        {article.date}
-      </Text>
-      <Text className={classes.title} mt={5}>
-        {article.title}
-      </Text>
     </Card>
   ));
 
