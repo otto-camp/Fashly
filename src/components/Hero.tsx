@@ -8,7 +8,8 @@ import {
   Title,
 } from "@mantine/core";
 import heroImage from "../assets/hero-image.webp";
-import { IconMap } from "@tabler/icons";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const useStyles = createStyles((theme) => ({
   hero: {
@@ -75,8 +76,14 @@ const useStyles = createStyles((theme) => ({
 
 function Hero() {
   const { classes } = useStyles();
+  const navigate = useNavigate();
   return (
-    <div className={classes.hero}>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.7, type: "spring" }}
+      className={classes.hero}
+    >
       <Overlay
         gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, .45) 40%)"
         opacity={1}
@@ -97,12 +104,12 @@ function Hero() {
           size="lg"
           radius="md"
           className={classes.control}
+          onClick={() => navigate("/shop")}
         >
           Shops
-          <IconMap />
         </Button>
       </Container>
-    </div>
+    </motion.div>
   );
 }
 

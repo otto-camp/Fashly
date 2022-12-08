@@ -2,14 +2,17 @@ import Navbar from "./layout/Navbar";
 import {
   ColorScheme,
   ColorSchemeProvider,
+  Loader,
   MantineProvider,
 } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
-import Home from "./pages/Home";
 import Footer from "./layout/Footer";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import Blog1 from "./pages/Blogs/Blog1";
 
+const Home = lazy(() => import("./pages/Home"));
+const Shop = lazy(() => import("./pages/Shop"));
 const Products = lazy(() => import("./pages/Products"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -38,19 +41,34 @@ function App() {
         withGlobalStyles
         withNormalizeCSS
       >
-        <Navbar links={["Home", "Products", "Blog", "About", "Contact"]} />
-        <Suspense fallback={<div>Loading</div>}>
+        <Navbar links={["Home", "Products", "Shop", "Contact"]} />
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Loader size={80} />
+            </div>
+          }
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/blog/" element={<Blog />}>
+              <Route path=":blog1" element={<Blog1 />} />
+            </Route>
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />´
             <Route path="*" element={<Error />} />
           </Routes>
         </Suspense>
-        <Footer links={["Home", "Products", "Blog", "About", "Contact"]} />
+        <Footer />
       </MantineProvider>
     </ColorSchemeProvider>
   );

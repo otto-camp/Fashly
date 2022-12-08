@@ -1,124 +1,117 @@
-import {
-  AspectRatio,
-  Card,
-  ColorSwatch,
-  Container,
-  createStyles,
-  Flex,
-  Group,
-  Image,
-  Radio,
-  SimpleGrid,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
-import React from "react";
-import Hero from "../components/Hero";
+import { Container, Flex, Stack } from "@mantine/core";
+import React, { lazy } from "react";
+import { IconBriefcase, IconReportMoney, IconShoe } from "@tabler/icons";
 import product1 from "../assets/products/product1.webp";
 import product2 from "../assets/products/product2.webp";
 import product3 from "../assets/products/product3.webp";
 import product4 from "../assets/products/product4.webp";
-import Stat from "../components/Stat";
-import { IconBriefcase, IconReportMoney, IconShoe } from "@tabler/icons";
-import { useNavigate } from "react-router-dom";
+import CardCarousel from "../components/CardCarousel";
+const Stat = lazy(() => import("../components/Stat"));
+const Hero = lazy(() => import("../components/Hero"));
+const Subscription = lazy(() => import("../components/Subscription"));
 
 const mockdata = [
   {
     title: "Top 10 places to visit in Norway this summer",
     image: product1,
-    date: "August 18, 2022",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quasi perspiciatis magni.",
+    colors: [
+      "#FFD43B",
+      "#51CF66",
+      "#F76707",
+      "#1C7ED6",
+      "#C2255C",
+      "#141517",
+      "#FFFFFF",
+    ],
+    sizes: [28, 28.5, 29, 29.5, 30],
   },
   {
     title: "Best forests to visit in North America",
     image: product2,
-    date: "August 27, 2022",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quasi perspiciatis magni.",
+    colors: [
+      "#FFD43B",
+      "#51CF66",
+      "#F76707",
+      "#1C7ED6",
+      "#C2255C",
+      "#141517",
+      "#FFFFFF",
+    ],
+    sizes: [28, 28.5, 29, 29.5, 30],
   },
   {
     title: "Hawaii beaches review: better than you think",
     image: product3,
-    date: "September 9, 2022",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quasi perspiciatis magni.",
+    colors: [
+      "#FFD43B",
+      "#51CF66",
+      "#F76707",
+      "#1C7ED6",
+      "#C2255C",
+      "#141517",
+      "#FFFFFF",
+    ],
+    sizes: [28, 28.5, 29, 29.5, 30],
   },
   {
     title: "Mountains at night: 12 best locations to enjoy the view",
     image: product4,
-    date: "September 12, 2022",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo quasi perspiciatis magni.",
+    colors: [
+      "#FFD43B",
+      "#51CF66",
+      "#F76707",
+      "#1C7ED6",
+      "#C2255C",
+      "#141517",
+      "#FFFFFF",
+    ],
+    sizes: [28, 28.5, 29, 29.5, 30],
   },
 ];
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    transition: "transform 150ms ease, box-shadow 150ms ease",
-
-    "&:hover": {
-      transform: "scale(1.01)",
-      boxShadow: theme.shadows.md,
-    },
-  },
-
-  image: {
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 600,
-  },
-}));
-
 function Home() {
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
-  const navigate = useNavigate();
-
-  const cards = mockdata.map((article) => (
-    <Card key={article.title} mt={32} radius={0} className={classes.card}>
-      <AspectRatio ratio={1920 / 1080}>
-        <Image
-          src={article.image}
-          width="100%"
-          height="auto"
-          className={classes.image}
-          onClick={() => navigate("/products")}
-          withPlaceholder
-        />
-      </AspectRatio>
-    </Card>
-  ));
-
   return (
     <Container my="xs" style={{ maxWidth: 1400 }}>
-      <Hero />
-      <Flex
-        direction={{ base: "column", sm: "row" }}
-        gap={{ base: "sm", sm: "xs" }}
-        justify="space-around"
-        mt={32}
-        mb={16}
-      >
-        <Stat
-          icon={<IconShoe />}
-          title="Shoes"
-          text="Pairs of shoes are in out catalog"
-          value={43}
-        />
-        <Stat
-          icon={<IconBriefcase />}
-          title="Deal"
-          text="Deals last year"
-          value={60}
-        />
-        <Stat
-          icon={<IconReportMoney />}
-          title="Sales"
-          text="Sold only last month"
-          value={14532}
-        />
-      </Flex>
-      <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
-        {cards}
-      </SimpleGrid>
+      <Stack spacing="xl">
+        <Hero />
+
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          gap={{ base: "sm", sm: "xs" }}
+          justify="space-around"
+        >
+          <Stat
+            icon={<IconShoe />}
+            title="Shoes"
+            text="Pairs of shoes are in out catalog"
+            value={43}
+          />
+          <Stat
+            icon={<IconBriefcase />}
+            title="Deal"
+            text="Deals last year"
+            value={60}
+          />
+          <Stat
+            icon={<IconReportMoney />}
+            title="Sales"
+            text="Sold only last month"
+            value={14532}
+          />
+        </Flex>
+
+        <Subscription />
+
+        <CardCarousel data={mockdata} />
+      </Stack>
     </Container>
   );
 }

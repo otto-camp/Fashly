@@ -129,7 +129,7 @@ function Navbar({ links }: NavbarProps) {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} mb={20} className={classes.root}>
+    <Header height={HEADER_HEIGHT} mb={20} className={classes.root} role="navigation">
       <Container className={classes.header}>
         <Title size={42}>
           <NavLink
